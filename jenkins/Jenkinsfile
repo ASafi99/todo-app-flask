@@ -27,8 +27,9 @@ pipeline {
                 if (env.RUN_APP == "true"){
                 sh "bash jenkins/run_app.sh"
              
-               }
-            }   
+                    }
+                }   
+            }
         }
     }
 }
