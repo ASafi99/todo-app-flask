@@ -18,8 +18,10 @@ pipeline {
         }
         stage('Create Schema') {
             steps {
-                if (env.CREATE_SCHEMA) {
-                    sh 'bash jenkins/create_schema.sh'
+                script {
+                    if (env.CREATE_SCHEMA) {
+                        sh 'bash jenkins/create_schema.sh'
+                    }
                 }
             }
         }
