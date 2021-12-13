@@ -1,25 +1,34 @@
 pipeline {
     agent any
+    environment{
+        CREATE_SCHEMA= "true"
+        RUN_APP = "false" 
+        DATABASE_URI= credentials("DATABASE_URI")   
+    }
     stages {
         stage('Setup') {
             steps {
                 sh "bash jenkins/setup.sh"
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         //
-        //     }
-        // }
-        // stage('Create Schema') {
-        //     steps {
-        //         //
-        //     }
-        // }
-        // stage('Run') {
-        //     steps {
-        //         //
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                 sh "bash jenkins/test.sh"
+            }
+        }
+        stage('Create Schema') {
+            steps {
+                if (env.CREATE_SCHEMA == "true"){
+                sh "bash jenkins/create_schema.sh"  
+            }
+        }
+        stage('Run') {
+            steps {
+                if (env.RUN_APP == "true"){
+                sh "bash jenkins/run_app.sh"
+             
+               }
+            }   
+        }
     }
 }
