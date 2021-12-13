@@ -19,17 +19,20 @@ pipeline {
         stage('Create Schema') {
             steps {
                 if (env.CREATE_SCHEMA == "true"){
+
                 sh "bash jenkins/create_schema.sh"  
+                
+                }
             }
         }
         stage('Run') {
             steps {
                 if (env.RUN_APP == "true"){
+                    
                 sh "bash jenkins/run_app.sh"
              
                     }
                 }   
-            }
         }
     }
 }

@@ -3,6 +3,6 @@
 source venv/bin/activate
 
 sh 'echo "creating schema..."'     
-                sh "python3 create.py"
+sh "python3 create.py"
 
-                sh 'echo " Schema created!"'
+sh 'echo " Schema created!"'
