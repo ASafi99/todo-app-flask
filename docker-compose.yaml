@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  todo-app:
+    container_name: todo_app
+    image: asafi99/todo-app:latest
+    build: .
+    ports:
+    - published: 80
+      target: 5000
+    environment:
+      DATABASE_URI: mysql+pymysql://root:${MYSQL_ROOT_PASSWORD}@todo_database:3306/todo
+      CREATE_SCHEMA:
+    depends_on:
+      - database
+  database:
+    container_name: todo_database
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: todo
+    volumes:
+      - type: volume
+        source: todo_database_volume
+        target: /var/lib/mysql
+volumes:
+  todo_database_volume: 
